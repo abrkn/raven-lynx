@@ -8,7 +8,7 @@ const HEARTBEAT_INTERVAL = 10e3;
 
 const Raven = SENTRY_DSN && require('raven');
 const Lynx = LYNX_HOST && require('lynx');
-const parentPackageName = require('parent-package-json')().parse().name;
+const parentPackageName = require('../../package.json').name;
 
 if (Raven) {
   Raven.config(SENTRY_DSN, {
