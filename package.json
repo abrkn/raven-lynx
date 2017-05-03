@@ -24,6 +24,7 @@
   "dependencies": {
     "gitignore": "0.6.0",
     "lynx": "0.2.0",
+    "parent-package-json": "2.0.0",
     "raven": "1.2.1"
   }
 }

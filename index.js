@@ -8,6 +8,7 @@ const HEARTBEAT_INTERVAL = 10e3;
 
 const Raven = SENTRY_DSN && require('raven');
 const Lynx = LYNX_HOST && require('lynx');
+const parentPackageName = require('parent-package-json').parse().name;
 
 if (Raven) {
   Raven.config(SENTRY_DSN, {
@@ -33,10 +34,8 @@ if (Lynx) {
     },
   });
 
-  const packageName = require('./package.json').name;
-
   timer = setInterval(() => {
-    lynx.increment(`service.heartbeat,service=${packageName}`);
+    lynx.increment(`service.heartbeat,service=${parentPackageName}`);
   }, HEARTBEAT_INTERVAL);
 }
 
