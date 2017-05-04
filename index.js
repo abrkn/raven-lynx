@@ -50,6 +50,8 @@ if (Lynx) {
   };
 
   timer = setInterval(sendHeartbeat, HEARTBEAT_INTERVAL);
+  timer.unref();
+
   setImmediate(sendHeartbeat);
 } else {
   debug('Not configuring Lynx. LYNX_HOST not set');
