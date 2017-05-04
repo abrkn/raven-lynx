@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/abrkn/raven-lynx#readme",
   "dependencies": {
+    "debug": "2.6.6",
     "gitignore": "0.6.0",
     "lynx": "0.2.0",
     "raven": "1.2.1"
