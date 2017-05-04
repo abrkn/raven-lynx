@@ -24,6 +24,8 @@ if (Raven) {
     console.error(error.stack);
     Raven.captureException(error, () => process.exit(1));
   });
+} else {
+  debug('Not configuring Raven. SENTRY_DSN not set');
 }
 
 let lynx;
@@ -46,6 +48,8 @@ if (Lynx) {
     debug('Sending heartbeat...');
     lynx.increment(`service.heartbeat,service=${parentPackageName}`);
   }, HEARTBEAT_INTERVAL);
+} else {
+  debug('Not configuring Lynx. LYNX_HOST not set');
 }
 
 return {
