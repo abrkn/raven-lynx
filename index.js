@@ -44,10 +44,13 @@ if (Lynx) {
 
   debug(`Will send heartbeat every ${HEARTBEAT_INTERVAL / 1e3} sec`);
 
-  timer = setInterval(() => {
+  const sendHeartbeat = () => {
     debug('Sending heartbeat...');
     lynx.increment(`service.heartbeat,service=${parentPackageName}`);
-  }, HEARTBEAT_INTERVAL);
+  };
+
+  timer = setInterval(sendHeartbeat, HEARTBEAT_INTERVAL);
+  setImmediate(sendHeartbeat);
 } else {
   debug('Not configuring Lynx. LYNX_HOST not set');
 }
