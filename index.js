@@ -17,12 +17,15 @@ if (Raven) {
 
   Raven.config(SENTRY_DSN, {
     captureUnhandledRejections: true,
+    autoBreadcrumbs: true,
   });
 
-  process.on('unhandledException', (error) => {
-    console.error('Unhandled exception:');
-    console.error(error.stack);
-    Raven.captureException(error, () => process.exit(1));
+  Raven.install(function (err, sendErr, eventId) {
+    if (!sendErr) {
+      console.error(`Fatal error reported as ${eventId}:`);
+      console.error(err.stack);
+    }
+    process.exit(1);
   });
 } else {
   debug('Not configuring Raven. SENTRY_DSN not set');
